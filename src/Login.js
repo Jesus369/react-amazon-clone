@@ -1,16 +1,32 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from "firebase/auth";
 import { auth } from "./firebaseConfig";
 import "./css/Login.css";
 
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const signIn = e => {
     e.preventDefault();
+    signInWithEmailAndPassword(auth, email, password)
+      .then(userCredentials => {
+        const user = userCredentials.user;
+        if (user) {
+          navigate("/");
+        }
+      })
+      .catch(error => {
+        const err = error.code;
+        const message = error.message;
+        alert(message);
+      });
   };
 
   const register = e => {
@@ -19,7 +35,9 @@ const Login = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then(userCredential => {
         const user = userCredential.user;
-        console.log(user);
+        if (user) {
+          navigate("/");
+        }
       })
       .catch(err => {
         const errorCode = err.code;
