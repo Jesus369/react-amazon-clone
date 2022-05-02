@@ -9,7 +9,7 @@ import { auth } from "./firebaseConfig.js";
 import { signOut } from "firebase/auth";
 
 function Header() {
-  const [{ basket, user }] = useStateValue();
+  const [{ basket, user }, dipatch] = useStateValue();
   const handleAuth = () => {
     signOut(auth);
   };
@@ -29,17 +29,19 @@ function Header() {
           <Link className="header__option" to={!user && "/login"}>
             <span className="header__optionLineOne">
               Hello
-              {!user ? "Guest" : user.email}
+              {!user ? "Guest" : user?.email}
             </span>
             <span className="header__optionLineTwo">
               {user ? "Sign Out" : "Sign In"}
             </span>
           </Link>
         </div>
-        <div className="header__option">
-          <span className="header__optionLineOne">Returns</span>
-          <span className="header__optionLineTwo">& Orders</span>
-        </div>
+        <Link to="/orders" className="header__option">
+          <div className="header__option">
+            <span className="header__optionLineOne">Returns</span>
+            <span className="header__optionLineTwo">& Orders</span>
+          </div>
+        </Link>
         <div className="header__option">
           <span className="header__optionLineOne">Your</span>
           <span className="header__optionLineTwo">Prime</span>

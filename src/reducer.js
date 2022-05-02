@@ -8,12 +8,14 @@ export const getBasketTotal = basket =>
 
 const reducer = (state, action) => {
   switch (action.type) {
+    // ADD ITEM TO BASKET
     case "ADD_TO_BASKET":
       return {
         ...state,
         basket: [...state.basket, action.item]
       };
 
+    // REMOVE ITEM FROM BASKET
     case "REMOVE_FROM_BASKET":
       const index = state.basket.findIndex(
         basketItem => basketItem.id === action.id
@@ -33,6 +35,13 @@ const reducer = (state, action) => {
         basket: newBasket
       };
 
+    case "EMPTY_BASKET":
+      return {
+        ...state,
+        basket: []
+      };
+
+    // LOGIN
     case "SET_USER":
       return {
         ...state,
