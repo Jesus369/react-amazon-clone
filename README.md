@@ -1,10 +1,4 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
+### `Amazon Clone Built With React, Node, Firebase, Stripe`
 
 ### `npm start`
 
@@ -22,6 +16,3 @@ firebase emulators:start
 
 ### `deploy firebase function (backend)`
 firebase deploy --only function
-
-
-
